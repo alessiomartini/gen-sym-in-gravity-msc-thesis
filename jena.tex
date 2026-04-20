@@ -20,6 +20,10 @@
 \usepackage{tcolorbox}
 %\usepackage{subcaption}
 
+%ADDED BY ALESSIO
+\usepackage{enumerate}
+%END ADDITION BY ALESSIO
+
 %Ensuring that header of section+subsection is on the right
 \usepackage{etoolbox}
 \patchcmd{\section}
@@ -239,7 +243,7 @@
 
 \begin{document}
 
-\title{Non-invertible symmetries in Gravity models}
+\title{Non-invertible symmetries to study 3d complex scalar boson}
 \author{Alessio Martini} 
 \email{a.martini@uva.nl}
 \affiliation{Institute for Theoretical Physics, University of Amsterdam\\} 
@@ -260,413 +264,174 @@ To be written.
 \subsection{Motivation: ...} \label{sec:motivation} 
 
 To be written.
- 
-\section{Non-invertible symmetries: the axial anomaly}
-We will now discuss a different generalization of the idea of symmetry -- {\it non-invertible symmetries}.
-
- Everything we have discussed so far has involved topological charge defects, whose fusion obeys a group composition law \eqref{groupcomp}:
-\be
-U_{g}(\sM_{d-1}) U_{g'}(\sM_{d-1}) = U_{g g'}(\sM_{d-1}),
-\ee
-where $g, g' \in G$ with $G$ some group. In particular, this means that given a particular charge defect labeled by $g$, there is always an inverse element $g^{-1}$ such that
-\be
-U_{g}(\sM_{d-1}) U_{g^-1}(\sM_{d-1}) = \mathbf{1}
-\ee
-However one could ask -- is it possible for there to exist topological defects that obey a more general fusion rule, e.g. of the form?
-\be
-U_{a}(\sM_{d-1}) U_{b}(\sM_{d-1}) = \sum_{c} N^{c}_{ab} U_{c}(\sM_{d-1})
-\ee
-where, e.g. the right hand side involves a non-trivial sum, rather than just a single element? In that case it is possible that some elements will not have an inverse. This is the idea of {\bf non-invertible} symmetries. 
-
-Examples of this sort of phenomena have been known for a very long time in 2d CFT \cite{verlinde1988fusion}. Their study has exploded recently, with many new and physically relevant examples found in higher dimensions. We will not make an attempt to survey these developments here, but instead refer the reader to recent reviews \cite{Cordova:2022ruw,Schafer-Nameki:2023jdn,Shao:2023gho} which provide an entry point to the literature. 
-
-Before moving on to our main focus, we do however mention one important example, which exists in the familiar 2d Ising model. This theory has an ordinary 0-form invertible $\mathbb{Z}_2$ symmetry that acts on the spins as $\sig \to -\sig$, and this symmetry is associated with an topological line in the manner that is now familiar. However, when tuned to its critical point, the model has an extra topological line which is non-invertible in the sense described above. One way to understand this line is to consider taking half of the 2d space and performing Kramers-Wannier duality on it. As this is a self-duality for the 2d Ising model at the critical point, it will map the bulk of the space to itself. However the junction between the original model and the dual model has some non-trivial object living on it. This turns out to be a topological line which is non-invertible in the sense described above \cite{Frohlich:2004ef,Chang:2018iay}. It is beautifully reviewed from several different points of view in \cite{Shao:2023gho}. 
-
-In these notes we will now study how these symmetries present us with a new way to think about the venerable Adler-Bell-Jackiw anomaly. 
-\subsection{Different types of anomalies}
-Let us remind ourselves about the physics of anomalies, starting from the example of a massless Dirac fermion in 4d. Consider first the theory of a Dirac fermion alone, which we couple to an {\it external} $U(1)$ gauge field source $a$:
-\be
-S[\psi;a] = \int d^4x \bpsi \le(\slashed{\p} - i \slashed{a}\ri) \psi
-\ee
-Let us remind ourselves of the symmetries. The action above is invariant under two possible phase rotations of the Dirac fermion, $U(1)_V$ and $U(1)_A$:
-\be
-\psi \to e^{\frac{i\al}{2}} \psi \qquad \psi \to e^{\frac{i \al}{2}\ga^5} \psi
-\ee
-which have corresponding currents
-\be
-j^{\mu}_V = \bpsi \ga^{\mu} \psi \qquad j^{\mu}_A = \bpsi \ga^5 \ga^{\mu}\psi
-\ee
-Above we have coupled an external gauge field source to the vector current. Now it is well-known that if we insert this classical action into a path integral as
-\be
-Z[a] = \int [d\psi d\bpsi] \exp(-S[\psi;a])
-\ee
-then in the quantum theory with the external source turned on the axial current is no longer conserved \cite{Adler:1969gk,Bell:1969ts}: 
-\be
-d \star j_{A} = \frac{1}{4\pi^2} f \wedge f \qquad f = da \label{thooft} 
-\ee
-The result above is one-loop exact. 
-
-Note however that it is not conserved in a {\it very} specific way: the nonconservation of the axial current is {\it precisely} determined by the external source. This is called an {\it 't Hooft anomaly}. 
-
-From the point of view of obtaining predictive power over the theory, a 't Hooft anomaly is generally {\it better} than not having any anomaly at all, as one can obtain non-trivial constraints over the dynamics; after all, we can always choose to set the applied source to zero (so that we have a conserved current again), but we can do more. For example, it is clear that a theory with \eqref{thooft} cannot have a trivial unique gapped ground state, as then one could imagine a setup where the right-hand side of the equation (which we can control freely) is not zero, but the left hand side (which is constrained by the gapped dynamics) is. 
-
-However, in these lectures we will not be discussing 't Hooft anomalies. Instead we want to consider {\it not} the theory above -- where $a$ was frozen -- but rather massless QED. To that end we will promote $a$ to a dynamical gauge field $A$, with its own kinetic term: 
-\be
-S[\psi,A] = \int d^4x \le(\frac{1}{4 e^2} F^2 + \bpsi \le(\slashed{\p} - i \slashed{A}\ri) \psi\ri) \qquad F = dA,
-\ee
-and now {\it also} integrate over it in the path integral, i.e.
-\be
-Z = \int [dA] [d\psi] \exp(-S[\psi,A])
-\ee
-Let us now revisit the anomaly equation \eqref{thooft}, which now has a very different character:
-\be
-d \star j_{A} = \frac{1}{4\pi^2} F \wedge F
-\ee
-as the right-hand side is now a dynamical operator, which fluctuates. Thus it now naively seems like we have lost the symmetry entirely -- the current is just not conserved any more. We will refer to this kind of anomaly -- where the right-hand side is an operator -- as an {\it Adler-Bell-Jackiw} anomaly\footnote{This  nomenclature seems a little imperfect, but I believe it is now standard.}. 
-
-Let us nevertheless try to make sense of it. The first obvious thing to do is consider defining the following shifted current:
-\be
-\star \tilde{j}_A = \star j_{A} - \frac{1}{4\pi^2} A \wedge F
-\ee
-This satisfies $d\star \tilde{j}_A = 0$. However it does not actually make sense as a local operator: it is not gauge invariant under small gauge transformations $\delta A = d\Lambda$. 
-
-However we could try to ignore this, and instead simply integrate the whole thing over a 3-manifold anyway to try and make a conserved charge defect, i.e. imagine constructing the following object:
-\be
-\hat{U}_{\al}(\sM_3) = \exp\le(i\frac{\al}{2} \int_{\sM_3} \le(\star j_{A} - \frac{1}{4\pi^2} A \wedge dA\ri)\ri) \label{illdef} 
-\ee
-Because we are considering an integral, this is now gauge-invariant under small gauge transformations $\delta A = d\Lambda$. It is also invariant under small deformations of $\sM_3$ and naively it looks like it forms a topological charge defect; the first term rotates an operator with integer axial charge $q$ by $\sO \to e^{\frac{i q \al}{2}}\sO$.
-
-The issue however is invariance under {\it large} gauge transformations. Recall from Section \ref{effdesc} that this quantizes the coefficients of Chern-Simons terms in the action; if we want consistency of this object in a situation where $\sM_3$ has a non-trivial $1$-cycle, then we require that 
-\be
-\al \in 2\pi\mathbb{Z}
-\ee
-This means that we can no longer perform a continuous rotation, i.e. it looks like there is trivial action on all operators \footnote{There is a possible $\mathbb{Z}_2$ action depending on whether $q$ is even or odd; this $\mathbb{Z}_2$ is essentially $\psi \to -\psi$, which is part of the $U(1)$ gauge symmetry and is not anomalous.}. 
-
-Thus we cannot form a topological operator on general 3-manifolds $\sM_3$, and it really does look like we have lost the axial symmetry. This may feel somewhat peculiar. In particular, note that the left hand side has a universal description in terms of the current for the (preserved) 1-form symmetry $U(1)^{(1)}_m$, and one might hope that this could be given a precise characterization in terms of some sort of intertwining of these symmetries. 
-
-Note also that if we were willing to restrict our attention to topologically trivial 3-manifolds such as $\mathbb{R}^3$ then technically speaking one could get away with ignoring the issue of large gauge transformations; nevertheless we might worry that we are missing some key physics. 
-\subsection{Charge defect operators for $U(1)_A$}
-The situation changed when the works \cite{Choi:2022jqy,Cordova:2022ieu} explained how to construct topological charge defects for the ABJ anomaly. Let us begin by considering only rotation angles that are simple fractions of the form 
-\be
-\al = \frac{2\pi}{N}
-\ee
-where $N \in \mathbb{Z}$, which is an arbitrary integer. For the reasons above $\hat{U}_{\al}$ does not exist. However let us now consider a different operator:
-\be
-D_{\frac{1}{N}}(\sM_3) \equiv \int [dB] \exp\le[i\int_{\sM_3} \le(\frac{2\pi}{2N} \star j_A + \frac{N}{4\pi} B \wedge dB + \frac{1}{2\pi} B \wedge dA\ri)\ri] \label{noninvdef} 
-\ee
-Here we have done something radical -- we have introduced a new dynamical compact gauge field $B$ and given it a topological Chern-Simons action with coefficient $N$, and then we have coupled it to the dynamical photon $A$. We have then done a path integral over that field. 
-
-Let me now state some properties of this object. From the first term, it generates a phase rotation on local operators with axial charge as $\sO \to e^{\frac{2\pi i q}{2N}} \sO$. It is perfectly well-defined and gauge-invariant since $N$ is in the numerator everywhere. However if we now try to impose the equations of motion of $B$ we find the following curious equation:
-\be
-B = -\frac{A}{N} \label{fraca} 
-\ee
-If you eliminate $B$ using this relation and plug it into the action \eqref{noninvdef} then you recover -- from a well-defined starting point -- the previously {\it ill}-defined object \eqref{illdef} with a fractional rotation angle $\hat{U}_{\frac{2\pi}{N}}$! 
-
-Thus we have succeeded in obtaining a well-defined topological charge defect that generates a non-trivial rotation, at the cost of introducing a new field $a$ on the defect (or equivalently, coupling a TQFT to the bulk degrees of freedom). 
-
-Note that \eqref{fraca} does not quite make sense -- if you integrate $d$ of it over a non-trivial cycle you find improperly quantized fluxes. Thus there is a more rigorous way then what we have just done to show that the defect is topological, involving gauging a $\mathbb{Z}_N$ subgroup of $U(1)_m^{(1)}$ on half of the space, but the intuitive argument above gives the correct answer. 
-
-Let us now explore the consequences of this new degree of freedom. Let's consider fusing two of these objects with opposite rotation angles:
-\be
-D_{\frac{1}{N}}(\sM_3) D_{-\frac{1}{N}}(\sM_3) = \int [dB_1] [dB_2] \exp\le[i\int_{\sM_3}\le( \frac{N}{4\pi} B_1 \wedge dB_1 - \frac{N}{4\pi} B_2 \wedge dB_2 + \frac{1}{2\pi} (B_1-B_2) \wedge dA\ri)\ri]
-\ee
-This object is {\bf not} the identity operator, as it would have been for a normal symmetry -- note that the difference gauge field $B_{\Delta} \equiv B_1 - B_2$ has a nontrivial coupling to the photon magnetic field. (In fact the right hand side is a kind of topological defect called a {\it condensation defect}.   \cite{Roumpedakis:2022aik,Choi:2022zal}). 
-
-Thus we cannot invert this symmetry any more, and we see that the true effect of the ABJ anomaly is to turn the ordinary axial symmetry into a {\bf non-invertible symmetry}; there is a topological defect associated with it which counts the charge, but the action of performing a charge rotation can no longer be undone. 
-
-How do we use this object? Its action on normal local operators is conventional and invertible, and as such it can be used to derive selection rules on scattering amplitudes and constrain the terms that can appear in RG. This works the normal way on $\mathbb{R}^4$ but can result in interesting subtleties for other manifolds; see \cite{Cherman:2022eml} for a recent discussion. 
-
-However its action on non-local objects such as 't Hooft lines is different. In general if one drags the 't Hooft line through one of these objects it acquires a {\it tail}, i.e. it becomes the boundary of a two-dimensional topological surface which is $\exp\le(\frac{i}{N}\int_{S} F\ri)$. This can be understood as a manifestation of the Witten effect \cite{Witten:1979ey}. As a reminder, the Witten effect tells us that if one introduces a topological coupling $\th$ as $\th \int_{\sM_4} F \wedge F$ -- which is essentially what we are doing when we perform the axial rotation above -- then this binds an fractional electric charge charge proportional to $\th$ to a magnetic monopole. A fractional electric Wilson line is not a well-defined object; the closest one can get to it is to integrate $F$ over a two-surface $S$ whose boundary can now be imagined to be the Wilson line. This explanation has been very telegraphic, see \cite{Choi:2022jqy} for more details. 
-
-Finally, you might feel worried that we have only constructed a rotation angle by $\frac{2\pi}{2N}$, for any $N$; however clearly by composing this $p$ times we can obtain any {\it rational} fraction $\frac{p}{N}$ of $2\pi$. (In fact there is a simpler route which uses a different and slightly more involved TQFT from the simple Chern-Simons theory to arise at the same rational covering of the unit circle). 
-
-The existence of rational numbers may seem peculiar. There is an alternative route to constructing the charge defects \cite{GarciaEtxebarria:2022jky,Karasik:2022kkq}; rather than introducing a Chern-Simons field on the defect, you introduce a compact phase field $\th(x)$ and consider the following gauge invariant object, parametrized by a continuous $U(1)$ element $\al$ (and not a rational number).  
-\be
-U_{\al}(\sM_3) = \int [d\th] \exp\le(i\frac{\al}{2} \int_{\sM_3} \le(\star j_{A} - \frac{1}{4\pi^2} (A - d\theta) \wedge dA\ri)\ri) \label{newdef} 
-\ee
-Here under a $U(1)$ gauge transformation the scalar $\theta$ transforms as:
-\be
-A \to A + d\lambda \qquad \theta \to \theta + \lambda
-\ee
-This object has the advantage\footnote{It also has a disadvantage: ideally one would like to be able to orient these charge defects with one dimension in {\it time} and then quantize the theory on an equal-time slice that intersects the defect. In that case one usually obtains a finite Hilbert space on the defect interacting with the regular quantum field theory degrees of freedom. The object \eqref{newdef} seems to have an infinite-dimensional Hilbert space living on it and is thus somewhat ill-defined in comparison to the mathematically precise degrees of freedom that constitute \eqref{noninvdef}. There is something to be resolved further here; I am grateful to S-H. Shao for discussions on this point.}   that it allows one to construct a local density on the defect
-\be
-\star \tilde{j}_A =  \star j_{A} - \frac{1}{4\pi^2} (A - d\theta) \wedge dA
-\ee
-As this object requires the phase field $\theta$ it cannot be defined {\it off} the defect. The existence of this density permits one to prove an analogue of Goldstone's theorem for this non-invertible symmetry, which can be viewed as a perhaps unnecessarily fancy way to understand why $U(1)$ axions are massless (or, in real life, why the $\pi_0$ is so light). Very recently other approaches to constructing a full $U(1)$ symmetry have been constructed \cite{Arbalestrier:2024oqg}. 
-
-
-\subsection{Ordinary global symmetries}
-
-To orient ourselves, let's consider a field theory with a $U(1)$ global symmetry. For much of what we will discuss in this section, you can consider any field theory you like, but for concreteness let us consider a charged scalar field:
-\be
-S[\phi] = \int d^{d}x \le(\p \phi^{\dagger} \p \phi + V(\phi^{\dagger}\phi)\ri)  \label{compscalac} 
-\ee
-We will assume that the potential has at least a mass term, and possibly some self interactions:
-\be
-V(\phi^{\dagger}\phi) = m^2 \phi^{\dagger} \phi + \frac{\lambda}{4}(\phi^{\dagger}\phi)^2 + \cdots \label{pot}
-\ee
-In almost all of these lectures we will work in Euclidean spacetime with $d$ dimensions, where $d$ will take various interesting values as we proceed. 
-
-This is a classical action, but we can make it into a quantum theory by inserting its exponential into a path integral:
-\be
-Z = \int [d\phi] \exp(-S[\phi,\phi^{\dagger}])
-\ee
-Now we know very well that this theory has a $U(1)$ global symmetry. What does it {\it act on?} This is a question with an obvious answer: it acts on the fundamental degree of freedom, the $\phi$ field, as
-\be
-\phi(x) \to \phi'(x) = e^{i\alpha} \phi(x) 
-\ee
-where $e^{i\alpha} \in U(1)$ is a space-time independent phase, and clearly the action is invariant. $\phi(x)$ is a local operator. Now through the usual Noether procedure we can construct a current which has {\it one index} for this symmetry:
-\be
-j^{\mu}(x) = i(\phi^{\dagger} \p^{\mu} \phi - \phi \p^{\mu} \phi^{\dagger})
-\ee
-The current is conserved on-shell. Classically, this just means that if $\phi$ satisfies the equations of motion we have 
-\be
-\p_{\mu} j^{\mu} = 0 \ . \label{currcons} 
-\ee
- This classical conservation equation is somewhat modified in the quantum theory. If we apply Noether's theorem inside the path integral, then (as explained in any introductory quantum field theory textbook), we find an expression of the form: 
-\be
-\langle \p_{\mu} j^{\mu}(x) \phi(y) \cdots \rangle = i \delta^{(d)}(x-y) \langle \phi(y) \cdots \rangle
-\ee
-In other words: the current is conserved {\it up to delta function terms at the location of the insertion of charged operators}. This is the {\it Ward identity}, and one should view this expression as telling us what it means to be charged operator. 
-
-Finally, global symmetries allow us to define a conserved charge. Normally we do this in Lorentzian signature in the following way:
-\be
-Q(t) = \int_{\mathbb{R}^{d-1}} d^{d-1}x j^0(t,\vec{x}) \label{ordQdef} 
-\ee
-where we do the integral over a time-slice $\mathbb{R}^{d-1}$. Let's just verify why this is conserved:
-\be
-\frac{d}{dt} Q(t) = \int_{\mathbb{R}^{d-1}} d^{d-1}x \p_{t} j^{0}(t,\vec{x}) = -\int_{\mathbb{R}^{d-1}} d^{d-1}x \p_{i} j^{i}(t,\vec{x}) = \mbox{boundary term} = 0
-\ee
-Let us draw a picture of this equation in Figure \ref{fig:0formparticles}: imagine that there are some particles sitting around. They trace out worldlines in space-time. The world-lines can't end, because the particle number is conserved. This integral over the time-slice intersects all of the world lines -- you can move it up and down in time and get the same answer, which is just the count of the particle number. A key point here is that {\bf ordinary symmetries are associated with counting particles.} 
-
-\begin{figure}[h]
-\begin{center}
-\includegraphics[scale=0.5]{0formparticles.pdf}
-\end{center}
-\caption{Particle world-lines can't end: no matter at what time-slice we evaluate $Q(t)$ on we get the same number.}
-\label{fig:0formparticles}
-\end{figure}
-
-Note also that the local field $\phi(x)$ is the thing that creates a particle or anti-particle. Another point is {\bf the charged object creates the thing that the charge counts}. 
-
-One more piece of formalism is that it is often useful to couple in an external gauge field $a_{\mu}$ to the current $j_{\mu}$. Here this coupling is implemented by demanding that the system is invariant under the combined transformation:
-\be
-a \to a + d\Lambda \qquad \phi \to \phi e^{i\Lambda} \label{u1extsource} 
-\ee
-where now $\Lambda(x)$ is a function of spacetime. To do this, we have to replace the normal derivative $\p_{\mu}\phi$ with the gauge-covariant one $D_{\mu}\phi = \p_{\mu}\phi - i a_{\mu} \phi$, and we can consider the action:
-\be
-S[\phi; a] =  \int d^{d}x \le((D \phi)^{\dagger} D \phi +  V(\phi^{\dagger}\phi)\ri) \qquad Z[a] = \int [d\phi] \exp(-S[\phi; a])
-\ee
-Note that $a$ is a fixed external field, and the invariances above mean that the path integral is invariant under external gauge transformations of $a$:
-\be
-Z[a + d\Lambda] = Z[a]
-\ee
-Furthermore, we can compute the current by constructing $j^{\mu}(x) = \frac{\delta Z[a]}{\delta a_{\mu}(x)}$. 
-
-
-Now, what are global symmetries good for? 
- 
-\section{Hydrodynamics}
-Here we turn to other applications of higher-form symmetries. Our considerations up till now have been somewhat formal: though we have studied some theories which exist in real life, we have not studied them under very realistic situations. As we will see below, it is in fact quite interesting to consider the realization of these higher-form symmetries at {\it finite temperature} $T$, providing us with very interesting connections to magnetohydrodynamics and astrophysics. In this section we assume the reader is familiar with the approach to finite-temperature quantum field theory in the formalism of the Euclidean path integral, as described for example in the standard textbooks \cite{kapusta2007finite,le2000thermal}. 
-%\subsection{Mean string field theory}
-\subsection{Finite temperature: static phenomena}
- A very physically relevant example is to study hot QED coupled to massive electrically charged matter (as in Section \ref{sec:matter}), i.e.
-\be
-S[\phi, A] = \int d^4x\le(\frac{1}{4e^2} F^2 + (D\phi)^{\dagger} D\phi + m^2 \phi^{\dagger}\phi + \cdots \ri)
-\ee
-If we are interested in static phenomena, we can understand the physics at finite $T$ by placing the system on $S^1 \times \mathbb{R}^{3}$, where the $S^1$ has length $\beta = \frac{1}{T}$. Note that the covariant derivative acts as $D_{\mu} \phi = \p_{\mu} \phi - i q A_{\mu} \phi$. 
-
-Recall that there is generically only a single magnetic 1-form symmetry with current $J^{\mu\nu} = \ha \ep^{\mu\nu\rho\sig} F_{\rho\sig}$. Upon dimensional reduction, from the 3d point of view this will break into a $0$-form symmetry $U(1)^{(0)}_m$ with current $j^{i} = J^{i\tau}$ and a $1$-form symmetry $U(1)^{(1)}_m$ with current $J^{ij}$. We should now ask -- as usual -- how these symmetries are realized on the $\mathbb{R}^{3}$, i.e. the non-compact directions. 
-
-To understand this, let us try and compute an effective action. Let's decompose the vector potential into $A_{\mu} = (A_{\tau}, A_{i})$ and understand what each of the components {\it feels}, by integrating out the bosons at finite temperature. Let us attempt to understand the expected result from elementary physics, which is that of a gas of charged bosons at finite temperature, interacting with electric fields. In quantum statistical mechanics, we often consider bosons at finite chemical potential $\mu$, which can be understood as the background value of the real-time vector potential $A_{t} = \mu$. Various quantities typically depend on $\mu$ though a Bose-Einstein distribution of the form
-\be
-n(E) = \frac{1}{e^{\beta (E \pm q\mu)}-1} 
-\ee
-where the sign depends on whether we are considering the particle or the antiparticle, which have opposite charge. Now when we go to Euclidean time we have $A_{\tau} = i A_t = i \mu$; let's also consider a limit where the mass of the particle is very high, so that $E \approx m$ (i.e. we are ignoring the contribution from the motion of the particles), and also that $\beta \gg E^{-1}, \mu$ (so that the mass and $\mu$ are high compared to the temperature). 
-
-In that case this distribution takes the form
-\be
-n(E) \sim e^{-\beta m \pm i q \beta A_{\tau}}
-\ee
-Thus if we now imagine constructing an effective action for $A_{\tau}$, the ingredients take the form shown above, and thus in the limit shown we expect an answer of the form: 
-\be
-S[A_{\tau}] = \beta \int d^3x \le(\frac{1}{2e^2} (\p_{i} A_{\tau})^2 + c_1 e^{-\beta m} \cos (q \beta A_{\tau}) + \cdots \ri) \label{effacfiniteT1} 
-\ee
-where the first term comes from the bare kinetic term, we have added together the particle and anti-particle contributions and $c_1$ is a non-universal constant. Note that the answer is periodic in $q \beta A_{\tau}$, as it must be since a background of the form $q\beta A_{\tau} = 2\pi \mathbb{Z}$ around a non-contractible $S^1$ is gauge-equivalent to no background at all. 
-
-The reader who is happy with this intuitive argument is free to move on; however the reader who wants a more concrete derivation may want to derive this result more formally, by explicitly computing the functional determinant of the $\phi$ field in the presence of a background constant $A_{\tau}$. To do this, we denote the eigenvalues of the relevant differential operator by $\lam_{n,\vec{p}}$. They satisfy the following equation: 
-\be
-(-D^{\mu} D_{\mu} + m^2) \phi = \lam_{n,\vec{p}} \phi
-\ee
-and are labeled by an integer $n \in \mathbb{Z}$ describing the dependence on Euclidean time and a continuous 3-vector momentum $\vec{p}$. Explicitly, they are:
-\be
-\lam_n = \le(\frac{2\pi n}{\beta} - q A_{\tau}\ri)^2 + \om_{\vec{p}}^2 \qquad \om_{\vec{p}}^2 = \vec{p}^2 + m^2
-\ee
-and thus we would like to compute the following determinant:
-\be
-\sL_{\mathrm{eff}}[A_{\tau}] = \log \det \le[(-D^{\mu} D_{\mu} + m^2)\ri] = T \sum_{n \in \mathbb{Z}} \int \frac{d^3p}{(2\pi)^3} \log \le(\le(\frac{2\pi n}{\beta} - q A_{\tau}\ri)^2 + \om_{\vec{p}}^2\ri)
-\ee 
-The sum over $n$ is divergent, but this UV divergence is unrelated to the thermal physics we are studying. We can isolate this divergence by taking a derivative with respect to $\om_{\vec{p}}$ to find
-\be
-\frac{1}{2\om_{\vec{p}}} \frac{d}{d\om_{\vec{p}}} \sum_{n} \log \le(\le(\frac{2\pi n}{\beta} - q A_{\tau}\ri)^2 + \om_{\vec{p}}^2\ri) = \sum_{n} \le[\le(\frac{2\pi n}{\beta} - q A_{\tau}\ri)^2 + \om_{\vec{p}}^2\ri]^{-1}
-\ee
-Performing the sum over $n$ and integrating over $\om_{\vec{p}}$ we find that up to an overall (divergent) $A_{\tau}$-independent additive constant we have
-\be
-\log \det \le[(-D^{\mu} D_{\mu} + m^2)\ri] = T \int \frac{d^3p}{(2\pi)^3} \log \le(\sinh\le(\ha(\beta \om_{\vec{p}} + i q A_{\tau}\beta)\ri) \sinh\le(\ha(\beta\om_{\vec{p}} - i q A_{\tau}\beta)\ri)\ri) 
-\ee
-Let us now work in the limit where the particles are very massive -- i.e. where most of the contribution to the energy comes from the rest mass of the particle $\om_{\vec{p}} \approx m$ -- and also where this mass is high compared to the temperature -- i.e. $\beta m \to \infty$. Then we can expand the action in powers of $e^{\frac{-\beta m}{2}}$ and find the leading $A_{\tau}$ dependence to be: 
-\be
-\sL_{\mathrm{eff}}[A_{\tau}] \approx T \int \frac{d^3p}{(2\pi)^3} \le(e^{-\beta m} \cos(q \beta A_{\tau}) + \cdots\ri)
-\ee
-Here we have taken $A_{\tau}$ to be a constant; thus this result is actually the leading term in a derivative expansion in powers of $\p_{i} A_{\tau}$, and the functional form as a function of $A_{\tau}$ is precisely that shown in \eqref{effacfiniteT1}. 
-
-Finally, we can understand this from an even slicker ``first-quantized'' language, involving particle worldlines rather than quantum fields. Recall that the gauge-invariant degree of freedom involving $A_{\tau}$ is the holonomy of the gauge field around the thermal circle,
-\be
-\exp\le(iq\oint_{S^1} A_{\tau}\ri) \ . 
-\ee
-In the limit where $A_{\tau}$ is constant in $\tau$ the holonomy becomes $e^{iq \beta A_{\tau}}$. Particle worldlines -- i.e. the quanta of the $\phi$ field -- that wrap the circle will feel this holonomy (with the particle feeling $e^{i\beta q A_{\tau}}$ and the anti-particle feling $e^{-i\beta q A_{\tau}}$), and each contribution of this worldline will be weighted by $e^{-\beta m}$ (i.e. the exponential of the particle action, which is just the length of its trajectory in Euclidean time). Assembling the pieces -- and performing a dilute gas sum over many disconnected particle worldlines that are each localized in $\mathbb{R}^3$, but wrap the $S^1$ cycle -- we again find the answer above. Note that this is essentially equivalent to the mechanism of Polyakov confinement in 3d \cite{Polyakov:1976fu,Polyakov:1975rs}, with the role of the monopole instanton now being played by the wrapped electric worldline. 
-
-Let us now understand the spatial components $A_i$; as it turns out, in the usual thermal equilibrium these components are essentially unaffected and they just inherit their bare kinetic term. (In the plasma literature, this is usually stated as the fact that the ``magnetic field is unscreened''). 
-
-Assembling the pieces we find the following answer for the full effective action in 3d:
-\be
-S[A_{\tau}, A_i] = \beta \int d^3x \le(\frac{1}{2 e^2} (\p_{i} A_{\tau})^2 + \frac{1}{4 e^2} (\p_i A_j)(\p^i A^j) + c_1 e^{-\beta m} \cos (q A_{\tau}) + \cdots\ri)
-\ee
-(If we move away from very massive limit, then we can still expand the effective action in harmonics of $\cos(q A_{\tau})$, in which case you can view this as the leading term.) The 3d symmetry currents that we previously identified can now be understood in terms of these low-energy fields as:
-\be
-J^{ij} = \ep^{ijk} \p_{k} A_{\tau} \qquad j^{i} = \ep^{ijk} \p_{j} A_{k}
-\ee
-Note the somewhat surprising fact that in the phase just described, the $U(1)^{(0)}_m$ is {\it spontaneously broken}. As we first saw back in the motivational Section \ref{sec:motivation}, it is possible to dualize the 3d vector field into a compact scalar $\th$ in \eqref{dualmap}, in terms of which the action for $A_i$ becomes that of a massless scalar action for $\th$. 
-$\th$ is the Goldstone mode of the symmetry breaking of $U(1)^{(0)}_m$. 
-
-%\begin{tcolorbox}
-%{\bf Exercise:} 
-%Prove the statement above: i.e. show that the action of free 3d electromagnetism with gauge potential $A_i$ can be dualized in terms of a compact scalar $\psi$, whose 0-form shift symmetry is spontaneously broken.
-%\end{tcolorbox} 
-
-In the application to plasmas, this captures the fact that the magnetic field is unscreened. If you imagine probing the finite temperature medium with two probe magnetic monopoles, they will feel a Coulomb law attraction, mediated by a gapless long-range force. This force arises from the Goldstone mode. 
-
-Note that due to the coupling to the finite-temperature charged matter, $A_{\tau}$ is gapped out -- and therefore probing the system with two probe electric charges will {\it not} result in a long-range force. This is precisely the physics of {\it Debye screening}: the electric field is screened by free charges in the medium. 
-
-The situation can be summarized in the table below; the phase we have just described is what is normally called {\bf plasma}\footnote{It is somehow soothing after all these years to find that this sophisticated pattern of higher-form symmetry breaking formally justifies the zeal with which my high-school science textbook distinguished between the ``plasma'' phase and conventional liquids and gases. It also allows one to formally distinguish between things like $\vec{D}$ vs $\vec{E}$ and $\vec{B}$ vs $\vec{H}$ and so on; the reader who wants to exorcise these possibly unpleasant memories using the sledgehammer of 1-form symmetry is directed to Appendix B of \cite{Das:2023nwl}. }
-
-\begin{table}[h]
-\centering
-\begin{tabular}{c|c|c}
-& $U(1)^{(1)}_m$ & $U(1)^{(0)}_m$ \\
-\hline
-Plasma (normal phase) & Unbroken & Spontaneously broken \\
-Superconducting & Unbroken & Unbroken \\ 
-\end{tabular}
-\end{table}
-
-Here we have also included the pattern of symmetry breaking for the superconducting phase at finite $T$. This is essentially the same as in Table \ref{EMsym} at zero temperature. 
-
-Note that the finite-temperature phase transition between the superconducting and plasma phase at finite temperature is just the breaking of an ordinary $U(1)$ 0-form symmetry in the 3 (non-compact) directions. In general this is the {\it XY universality class}. The application to finite-temperature superconductors is called {\it inverted XY criticality} \cite{Peskin:1977kp,dasgupta1981phase,kiometzis1994critical,herbut1996critical} as you will notice the interesting fact that the plasma (high temperature) phase has the symmetry spontaneously broken. This counterintuitive behavior arises ultimately from the origin of the finite temperature 0-form symmetry from the reduction of a 1-form symmetry on the thermal circle. The consequences of this pattern of symmetry breaking for a higher-form description of hydrodynamics was described in \cite{Armas:2018zbe,Armas:2018atq}. Discussion in language similar to that above can be found in \cite{Iqbal:2020lrt,Das:2023vls}. 
-
-\subsection{Finite temperature: magnetohydrodynamics} 
-Let us now think about the {\it real-time dynamics} of the finite-temperature QED plasma. This is the area that is the domain of {\it hydrodynamics}. 
-
-\subsubsection{Lightning review of ordinary hydrodynamics} 
-
-Let us briefly review the philosophy of hydrodynamics: it is an amazing fact that essentially any interacting system (quantum or otherwise) at finite temperature basically behaves at long distances and late times as a {\it fluid}, whose structure is dictated by the global symmetries and conserved charges of the system \cite{landau1987fluid}. 
-
-To understand this, note that the excitations of most of the degrees of freedom in a fluid will decay away with a characteristic time-scale $\tau$ that is set by some microscopic scale (e.g. the mean free path $\tau \sim \frac{\ell_p}{v}$, or the temperature $\tau \sim T^{-1}$, etc.). However, conserved quantities cannot vanish arbitrarily fast: instead they must ``spread out'', and the speed of this process depends on the size of the excitation. Thus if one creates a lump of charge with some size $L$, the speed of its decay will decay as some inverse power of $L$ ($\tau \sim L^{-2}$ for the most generic diffusive processes). At late times only the conserved charges are left. 
-
-In the modern formulation of hydrodynamics, this philosophy has been promoted to an algorithm: given a structure of global symmetries, one can turn a crank and a hydrodynamic theory pops out \cite{Kovtun:2012rj}, which can be expressed in terms of coarse grained variables. 
-
-In the simplest case of a relativistic case with a conserved stress tensor
-\be
-\p_{\mu} T^{\mu\nu} = 0 \label{consT} 
-\ee
-the fluid degrees of freedom are a normalized fluid velocity $u^{\mu}(x)$, $u^2 = -1$, and a scalar temperature field $T(x)$. The microscopic stress tensor can be expressed in terms of these coarse-grained variables as
-\be
-T^{\mu\nu} = (\ep + p)u^{\mu} u^{\nu} + p g^{\mu\nu}
-\ee
-Here $\ep(T)$ and $p(T)$ are functions of the temperature through the {\it equation of state} of the fluid, and the conservation of the stress tensor becomes a relativistic Navier-Stokes equation for $u^{\mu}$. If we further consider the case of hydrodynamics with an ordinary $0$-form global symmetry then we also add a degree of freedom $n(x)$ for the local charge density and write
-\be
-T^{\mu\nu} = (\ep + p)u^{\mu} u^{\nu} + p g^{\mu\nu} \qquad j^{\mu} = n u^{\mu}
-\ee
-The conservation equation $\p_{\mu} j^{\mu} = 0$ provides the required dynamical equation of motion for $n(x)$.  
-
-Finally, we stress that hydrodynamics is an {\it effective theory}, i.e. the expressions above can be systematically improved order by order in derivatives. Very important physics appears at first order in derivatives, which we discuss in the higher-form context below.  
-
-\subsubsection{Magnetohydrodynamics}
-Let us now apply this formalism to studying QED (with charged matter) at finite temperature. The hydrodynamic description of this model is normally called relativistic magnetohydrodynamics; it is conventionally studied by coupling the {\it gauged} electric charge current in the formalism above to Maxwell's equations in some form (see \cite{bellan2008fundamentals} for a textbook treatment and \cite{Hernandez:2017mch} for a modern discussion). 
-
-We will not do this -- instead we will go straight to the true 1-form global symmetry. 
-
-The conserved quantities are the regular stress-energy tensor $T^{\mu\nu}$ and the magnetic 2-form\footnote{In this section we use a different normalization for the current than in \eqref{Jdef}, to be closer to the fluid dynamics literature.} current $J^{\mu\nu} = \frac{1}{2} \ep^{\mu\nu\rho\sig}F_{\rho\sig}$. We now want to realize these objects in terms of some coarse-grained variables. This can be done by turning the hydrodynamic crank, but generalized to 1-form symmetries \cite{Grozdanov:2016tdf}. The idea of casting MHD as a fluid of strings predates the formal technology of 1-form symmetries, and was first discussed in \cite{Schubring:2014iwa}. 
-
-Here we discuss only the results, referring you to \cite{Grozdanov:2016tdf} for the derivations. At zeroth order in derivatives we have:
-\be
-T^{\mu\nu}_{(0)} = (\ep + p)u^{\mu} u^{\nu} + p g^{\mu\nu} - \mu \rho h^{\mu} h^{\nu} \qquad J^{\mu\nu}_{(0)} = 2 \rho u^{[\mu} h^{\nu]} \label{MHD0thorder} 
-\ee
-Here $u^{\mu}$ is the regular timelike fluid velocity. $h^{\mu}$ is a spacelike vector which indicates the direction of the magnetic field; these satisfy
-\be
-u^2 = -1 \qquad h^2 = 1 \qquad u \cdot h = 0
-\ee
-$\ep$ and $p$ are the energy density and pressure as usual. From the expression for $J^{\mu\nu}$ we see that $\rho$ is the density of magnetic flux. Finally $\mu$ is a scalar which can be thought of as the chemical potential that is conjugate to $\rho$. There are two independent scalar quantities, which can conveniently be chosen to be $T$ and $\mu$, and there are the regular thermodynamic constraints between the scalars:
-\be
-\ep + p = Ts + \mu \rho \qquad dp = s dT + \rho d\mu
-\ee
-where $s$ is the entropy density.  
-
-Note the term in $-\mu\rho h^{\mu} h^{\nu}$ -- this can be understood as the {\it tension} arising from the magnetic field lines. 
-
-The conservation equations $\p_{\mu}T^{\mu\nu} = 0$ and $\p_{\mu} J^{\mu\nu} = 0$ now provide us with dynamics for the fluid degrees of freedom, which can be thought of as a kind of Navier-Stokes equation of $u^{\mu}$ and an equation telling us how the magnetic field $(\rho, h^{\mu})$ evolves. Note that we never need to use Maxwell's equations -- the equations close all by themselves, though one can reverse the logic and interpret the magnetic equation of motion as a kind of Maxwell's equation. 
-
-We can now go to higher order in derivatives; the above is simply the first term in an expansion: 
-\be
-T^{\mu\nu} = T^{\mu\nu}_{(0)} + T^{\mu\nu}_{(1)} + \cdots \qquad J^{\mu\nu} = J^{\mu\nu}_{(0)} + J^{\mu\nu}_{(1)} + \cdots
-\ee
-Here for reasons of brevity we record only the first-order correction to $J^{\mu\nu}$, which takes the form: 
-\be
-J^{\mu\nu}_{(1)} = 2 m^{[\mu} h^{\nu]} + s^{\mu\nu}
-\ee
-where we have
-\be
-m^{\mu} = -2 r_{\perp} T \Delta^{\mu\beta} h^{\nu} \p_{\beta} \le(\frac{h_{\nu]}\mu}{T}\ri) \qquad s^{\mu\nu} = -2 \mu r_{\parallel} \Delta^{\mu\rho} \Delta^{\nu\sig} \p_{[\rho} h_{\sigma]}  \label{1order} 
-\ee
-We have introduced the projector $\Delta^{\al\beta} = g^{\al\beta} + u^{\al\beta} - h^{\al\beta}$, which annihilates both $u$ and $h$ and thus projects onto the subspace perpendicular to the magnetic field lines. We have introduced two new parameters $r_{\perp}$ and $r_{\parallel}$; these can be understood as {\it resistivities} that are parallel and perpendicular to the magnetic field lines. 
-
-To determine the resistivities, we compute them from {\bf Kubo formulas}, which relate dissipative transport coefficients to retarded Green's functions of the current operator $J^{\mu\nu}$ in thermal equilibrium. If we place the background magnetic field in the $z$ direction, these Kubo formulas are: 
-\be
-r_{\parallel} = \lim_{\om \to 0} \frac{G^{xy,xy}_{JJ}(\om)}{-i\om} \qquad r_{\perp} = \lim_{\om \to 0} \frac{G^{xz,xz}_{JJ}(\om)}{-i\om}
-\ee 
-
-In \eqref{1order} there is a particular pattern of derivatives that is quite constrained; this arises from demanding consistency of the second law of thermodynamics, which guarantees that entropy always locally increases. Indeed once one works out the consequences of these terms, we find that there is {\it diffusion} of magnetic field lines. In the simplest case where we set the background magnetic field to zero, the two resistivities agree $r_{\perp} = r_{\parallel} = r$ and the dispersion relation takes the form \cite{Hofman:2017vwr}: 
-\be
-\om = -i \frac{r}{\chi} k^2 \qquad \chi = \frac{d\rho}{d\mu} \label{disprel} 
-\ee 
-where $\chi$ is the susceptibility of the 1-form charge. 
-
-
-
-This formalism is pleasing because it uses principles only of global symmetries and effective theory, and thus can be systematically improved and (in principle) applied also to situations where the normal textbook description of MHD breaks down, for example in situations of strong electromagnetic correlations. In principle such an approach might have real-world applications. The close connection to the global symmetry structure also allows the technology of holography to be brought to bear, an approach which has been very fruitful in understanding the structure of conventional hydrodynamics (see e.g. \cite{Son:2007vk} for a review). A sampling of work in developing the formalism and potential applications of such an approach includes \cite{Armas:2023tyx,Das:2022fho,Davison:2022vqh,Vardhan:2022wxz,Armas:2022wvb,Poovuttikul:2021fdi,Armas:2019sbe,Gralla:2018kif,Glorioso:2018kcp,Grozdanov:2018fic,Grozdanov:2018ewh,Grozdanov:2017kyl}. One concrete application is to the understanding of real-time lattice experiments, where lattice effects mean that the effective electromagnetic coupling $e$ can be of order $1$. See e.g. \cite{Das:2023nwl} for a recent numerical investigation which verified the dispersion relation \eqref{disprel}, and where this EFT approach allowed for an understanding of previous unexplained lattice results. 
-
-\vspace{2cm} 
-{\bf Conclusions:} In these lectures we had a whirlwind tour of several topics in generalized global symmetries. We have made no attempt at being complete and have left out many fascinating topics. A partial list of such omissions includes:
-\begin{itemize}
-\item Our discussion used very little mathematical formalism and thus did not at all address the construction of representation theory for non-invertible and higher-form global symmetries, a program which is currently undergoing rapid progress (see e.g. \cite{Bhardwaj:2022yxj,Bartsch:2023pzl,Bartsch:2023wvv,Bhardwaj:2023wzd,Bhardwaj:2023ayw}).
-\item We only briefly discussed 't Hooft anomalies for conventional symmetries as a gateway to ABJ anomalies and their interpretation in terms of non-investible symmetries. There is clearly much more to say here: a review of anomalies in the conventional 0-form case can be found in \cite{Harvey:2005it}. Higher form symmetries can themselves have anomalies; indeed the electric and magnetic 1-form symmetries in free QED have a mixed anomaly, and a similar anomaly is present in any phase that spontaneously breaks a continuous $U(1)$ 0-form symmetry \cite{Delacretaz:2019brr}. Anomalies in higher-form symmetries can be used fruitfully to constrain the phase structure of gauge theories, see e.g. \cite{Gaiotto:2017yup,Gaiotto:2017tne,Gomis:2017ixy} for foundational early work. The formalism is reviewed in \cite{Bhardwaj:2023kri} and a review of applications can be found in \cite{Brennan:2023mmt}. 
-\item {\it Higher groups} provide a mechanism by which symmetries of different forms can mix with each other and fuse into a larger structure; they are characterized by structure constants which are invariant under RG and can also be used to understand phases quantum field theory. Foundational work includes \cite{Bhardwaj:2017xup,Benini:2018reh,Cordova:2018cvg}, and developments are reviewed in \cite{Bhardwaj:2023kri}. 
-\end{itemize} 
-
-Nevertheless, a concrete lesson is that thinking about global symmetries as defining {\bf topological objects} results in many insights that are both profound and useful. A more philosophical lesson is that many interesting systems in nature involve the existence of extended objects (magnetic field lines, flux tubes, domain walls, etc.), and the community is currently in the process of developing a formalism that allows us to reformulate quantum field theory in terms of the dynamics of these objects, rather than in terms of local fields (such as gauge fields) who represent extended objects indirectly (through gauge redundancies). 
-
-It remains to be seen where this line of reasoning will lead. It is left as a final exercise for the readers of these notes to figure this out. 
+
+\newpage
+
+\section*{- - - Sparse Notes - - -}
+
+Here I am writing things that will appear in the final thesis. But since there is no conclusion yet, and a unique logic that connects my journey into the physics topics I have encountered, I will write down here single topics that will appear in the final thesis, without showing a connection between them.
+
+\section{What is a Generalized Global Symmetry?} \label{sec:gensym_intro} 
+
+Let's stop and think. 
+\ben[A.]
+    \item What is a symmetry?
+    \item What is generalized?
+    \item Can we have a non global symmetry?
+\een
+
+\subsection{Let's start from the basics, with a reformulation}
+\label{sec:reformulation_symemtry}
+
+The answer to the first question is: "it is a topological operator". Or slightly more precise: the existence of an (ordinary) SYMMETRY (in Euclidean signature) implies the existence of a ($d-1$-dimensional) TOPOLOGICAL OPERATOR, but to understand this we need to revise what we already know from classical field theory.
+
+Given an ordinary global continuous internal symmetry with (Lie) group $G$ (and Lie algebra $\frak{g}$ with generators $\{e^a\}_{a\in \{1,..., dim G \}}$), the Nöether's theorem tells us that we have conserved local currents $j^a_\mu (x):\mathcal{M} \to \mathcal{N}$ \textcolor{red}{I'M NOT SURE OF N} (it will be clearer to think of the current as a $\frak{g}$-valued 1-form $j^a=j^a_\mu dx^\mu$ globally defined).
+\textcolor{red}{IS IT GLOBALLY DEFINED THIS EASILY? MAYBE IS A SECTION OF A BUNDLE}
+
+Notice that the conservation equation $g^{\mu \nu}\partial_\mu j_\nu^a = 0$ is equivalent to $d \star j^a=0$. \footnote{Since the Hodge operator $\star:\Omega^p(\mathcal{M}) \to \Omega^{d-p}(\mathcal{M})$ makes manifest the metric dependence, we decided to keep it manifest in the index notation.} Thus, given a continuous ordinary global symmetry, we have a closed $\frak{g}$-valued $d-1$-form.
+
+As a $d-1$-form, it naturally integrates over $d-1$-dimensional submanifold $\mathcal{M}_{d-1} \subset \mathcal{M}$: $Q^a(\mathcal{M}_{d-1}) = \int_{\mathcal{M}_{d-1}}\star j^a $, and as a closed form the dependence on $\mathcal{M}_{d-1}$ is said to be "topological" in the sense that it is independent with respect to continuous deformation of it: $\int_{\mathcal{M}_{d-1}}\star j^a = \int_{\mathcal{M}_{d}} d \star j^a - \int_{\mathcal{M'}_{d-1}}\star j^a = - \int_{\mathcal{M'}_{d-1}}\star j^a$ (where $\partial\mathcal{M}_{d}=\mathcal{M}_{d-1} \cup \mathcal{M'}_{d-1}$). \footnote{The minus sign is given by the opposite induced orientations from $\mathcal{M}_{d}$ to the boundary submanifolds.} Where we assumed that $j^a$ is not sourced by anything in $\mathcal{M}_{d}$, then it satisfies the continuation equation $d\star j^a=0$.
+
+The $Q^a$s play the role of generators of the Lie algebra $\frak{g}$. From Lie theory, we can recover the connected part of the Lie group $G$ that includes the identity element via the exponential map: $U_g(\mathcal{M}_{d-1}) = \exp \{ i R(g)_a Q^a(\mathcal{M}_{d-1}) \}$ \footnote{The $i$ in the exponent is old well known a physical convention. Assumed that, requiring unitarity of $U_g$ corresponds to requiring hermitianity of $Q^a$ (opposed to antihermitianity, without the $i$), which we like in quantum mechanics since means that the eigenvalues (the values the observable can assume) are real, opposed to purely imaginary, again a convention we like to mantain \textcolor{red}{IS THE LATTER A CONVENTION?}.} where $R$ is taken to be "a" representation of the algebra. \textcolor{red}{HERE I'VE CHOSEN A REPRESENTATION (UNITARY?), I'M NOT SURE IF IT IS NECESSARY, SHOULD NOT}
+
+Now that we have introduced the symmetry operator, and we have noticed the first property, namely being topological, let's notice the second: the composition (or more generally the fusion) of two symmetry operators respects a group law. $\lim_{\mathcal{M'}\to\mathcal{M}}U_{g'}(\mathcal{M'})U_{g}(\mathcal{M}) = U_{g'g}(\mathcal{M})$. Notice that the group does not need to be Abelian.
+
+\textcolor{red}{CHARGED OBJECTS}
+
+Here, the structure of the abstract symmetry is encoded in: what are the objects (the topological operators) and how they fuse (the group structure). Meanwhile, the structure of the objects charged under this symmetry is given by all the possible representations of the symmetry group.
+
+\textcolor{red}{SOME DIAGRAMS, CONSIDER THE RIGHT CATEGORY, $Vec_k (G)$ ? AND $Rep(G)$ ?}
+
+\textcolor{red}{HIGHER CATEGORICAL STRUCTURE} p.54 \cite{schafernameki2023ictplecturesnoninvertiblegeneralized}, for $d \geq 4$ the possible $d-1$-dim TQFTs we can stack are much richer (e.g G-symmetric modular tensor categories, i.e. non trivial topological order) TWISTED THETA DEFECT p.60 \cite{schafernameki2023ictplecturesnoninvertiblegeneralized}.
+
+\subsection{Let's reverse the logic!}
+The answer to the second question is: "two things, the dimension of the topological operator is no more constrained to be $d-1$ and the composition law does not to be group like anymore".
+
+These generalizations come from the inversion of the following logic: the traditional idea of a continuous symmetry can be encoded into a topological operator and the fusion rules it satisfies. That is, from now on, we will start from topological operators of every dimension and we will call it "a symmetry operator", we are immediately going to see that this leads to a much wider variety of structures compared to the traditional "ordinary global symmetry" point of view.
+
+The first generalization is: given that we find a $d-p-1$-dimensional topological operator, we will say our theory has a $p$-form symmetry, where the largest charged objects that transform under this symmetry are $p$-dimensional.
+
+\textcolor{red}{DRAWINGS}
+
+The second generalization is: the object obtained by fusing to topological operators is no more required to be a "simple" topological operator, where simple means it cannot be expressed as a sum of other topological operators. \footnote{Notice that this makes sense because "the sum" is not invertible, it does not exist a subtraction. Then we can decompose a "non simple" topological operator as a sum of simple ones.} In formulas, this can be written as: $\lim_{\mathcal{M'}\to\mathcal{M}}U_{a}(\mathcal{M'})U_{b}(\mathcal{M}) = \sum_c N^c_{ab} U_{c}(\mathcal{M})$. Here, $U_{i}(\mathcal{M})$ are 'simple' topological operator of fixed dimension. We will expand a little on the concept of 'simplicity' within the paragraph \ref{sec:operator_vs_defect}.
+
+\subsection{[NOT REALLY RELEVANT...] That is not possible! Local symmetry means gauge invariance, a redundancy}
+
+\textcolor{blue}{HERE I WANT TO MENTION SYMMETRY=NON TRIVIAL CHARGE, HAMILTONIAN CONSTRAINS. CONTINUOUS LOCAL INVARIANCE MEANS THAT WE ARE DESCRIBING THE THEORY WITH MORE DEGREES OF FREEDOM THAT THE PHYSICAL ONES. 3D SCALAR BOSON - GAUGE THEORY DUALITY, LINEAR THEORY-KLEIN GORDON HAS INFINITE SYMMETRIES PARAMETRIZED BY FUNCTIONS, CONSERVATION OF FOURIER MODES} \cite{Barcel__2016}
+
+\section{ASIDE: What is the difference between a topological operator and a symmetry defect?}\label{sec:operator_vs_defect}
+
+\textcolor{blue}{TIME ORIENTATION ETC.}
+
+\section{Anomaly, from what it is to what it can mean} \label{sec:anomaly} 
+
+\subsection{[ANOMALY THEORY] A modern formalism to describe anomalies}
+For continuous symmetries we can compute anomalies from triangle current diagrams, for discrete symmetries we need refinement: anomaly theory (and polynomial) p.25 \cite{schafernameki2023ictplecturesnoninvertiblegeneralized}.
 
 \begin{tcolorbox}
-{\bf Exercise:} 
-Figure this out.
+
+{\bf General Idea}
+
+Given a QFT $\mathcal{T}$, with a symmetry $\mathcal{S}$ given by a group $G$ and an anomaly ('t Hooft), we can couple the theory to a classical background gauge field $B$. Then the partition function is not invariant under background gauge transformations: $Z[B+d\lambda]=Z[B]\times \exp \{ \int_\mathcal{M}f(B,\lambda)\}$.
+
+Note that given this feature, the theory does not admit gauging with respect to the symmetry $G$.
+
+
+
+\end{tcolorbox} 
+
+\subsection{[IR CONSTRAINT] If the theory has an anomaly, we cannot have a trivial low energy effective theory}
+
+\subsection{[MIXED ANOMALY INTRO] The anomaly can be shared between multiple symmetries, mixed anomalies}
+
+\subsection{What happens if we gauge part of it?}
+\textcolor{blue}{NON INVERTIBLE DEFECTS FROM GAUGING MIXED ANOMALIES:}  \cite{Kaidi_2022, Bhardwaj_2023}. References taken from p.55 of \cite{schafernameki2023ictplecturesnoninvertiblegeneralized}.
+
+To be written.
+
+\subsection{[HIGHER GROUP OR NON-INVERTIBLE DEFECT] What other things can happen if we have a mixed anomaly?}
+THE FOLLOW IS TAKEN FROM \cite{Tachikawa_2020} AND EXPLAINS WHAT HAPPENS IF YOU HAVE A THEORY $\G$-SYMMETRIC WITH FINITE NORMAL NON-ANOMALOUS SUBGROUP $A$ AND YOU GAUGE $A$: \footnote{When the subgroup we gauge is non-normal it is more complicated, we know the answer for $d=2$ (footnote 1 of \cite{Tachikawa_2020})}
+\begin{tcolorbox}
+
+{\bf General Idea in general space time dimension}
+
+Depending on how the $\G$-symmetry is anomalous, you have three possibilities:
+\ben[\itshape i)]
+    \item when $\G$ is anomaly free you get $\G /A \times \hat{A}$ with mixed anomaly determined by the extension $0 \to A \to \G \to \G /A \to 0$
+    \item anomalous in a "tame" way, you get an extension of $\G /A$ by $\hat{A}$, ??$0 \to \hat{A} \to \G \to \G /A \to 0$?? leading to a higher-group  \footnote{Higher-group structure appears also gauging continuos symmetry with suitable anomaly (footnote 2 of \cite{Tachikawa_2020})}
+    \item anomalous in a wilder way, you get a non-invertible sym leading to a higher-category structure
+\een
+
+
 \end{tcolorbox} 
 
 
-\section{Applications}
+\subsubsection{[HIGHER GROUP] gauging mixed anomalies, take 1}
+2-groups and mixed anomalies are related by gauging \cite{Tachikawa_2020}. Reference taken from p.33 of \cite{schafernameki2023ictplecturesnoninvertiblegeneralized}.
+IDEA: if you have a 2-group structure (with no anomalies), i.e. having a 1-form and a 0-form symmetries which are inter-related, and gauge the 1-form sym, you get the dual-pontryagin symmetry wrt the 1-form sym (a d-p-2-form sym, p.24 \cite{schafernameki2023ictplecturesnoninvertiblegeneralized}) will have a mixed anomaly (?with the original non-gauged 0-form sym?).
 
-This has all been rather formal. We will now study a few examples and see what this formalism can do for us. 
-\subsection{Free electromagnetism}
+\subsubsection{[NON-INVERTIBLE DEFECT] gauging mixed anomalies, take 2}
+\label{sec:mix_anom_noninv_defect}
+AGAIN (end of \ref{sec:reformulation_symemtry}), if we have mixed anomaly (in $d \geq 4$), then the richer structure of TQFTs we can stack leads to TWISTED THETA DEFECTS. CLAIM: if we have a p-form sym in a mixed anomaly, and its background field appears linearly in the anomaly theory (d+1-dim theory) [in 3+1d-theories], then ...
+
+THE FOLLOWING IS TAKEN FROM \cite{Kaidi_2022} APPENDIX D \& E.
+\begin{tcolorbox}
+
+{\bf General Idea}
+
+Given a symmetry structure with a 0-form sym $G^{(0)}$ and a higher form sym $F^{(p)}$ with a mixed anomaly $\mathcal{A}_{d+1}=\int A^{(0)} \wedge f(B^{(p)})$, where $A^{(0)}$ and $B^{(p)}$ are the classical background gauge fields for the 0 and p-form sym respectively, and $f:H^{p+1}(\mathcal{M},\frak{f}) \to H^{d}(\mathcal{M},\frak{f})$. \textcolor{red}{DOES IT MAKE SENSE? CHECK! WE NEED f TO GIVE A TQFT.} Then, the symmetry defect of the 0-form sym $D^{(0)}=\exp \{ \int_{\mathcal{M}_{d-1}} \star j^{(0)}\}$ is not invariant under gauge sym transformation of the background $B^{(p)}$.
+
+In fact, $\langle D(\mathcal{M_{d-1}}) \rangle = Z[A=\delta(\mathcal{M_{d-1}})]$...???... \textcolor{red}{CAN BE PHRASED LIKE THIS?}
+
+Only $ D(\mathcal{M_{d-1}}) \times \exp \{ \int_{\mathcal{M}_d} f(B,\lambda)\}$ is gauge invariant. \textcolor{red}{TO BE CONCLUDED}
+
+
+\end{tcolorbox} 
+
+\begin{tcolorbox}
+
+{\bf 1+1 dimension}
+
+TOBEWRITTEN
+
+\end{tcolorbox} 
+
+\begin{tcolorbox}
+
+{\bf 2+1 dimension}
+
+TOBEWRITTEN
+
+\end{tcolorbox} 
+
+\begin{tcolorbox}
+
+{\bf 3+1 dimension}
+
+TOBEWRITTEN
+
+\end{tcolorbox} 
+
+\begin{tcolorbox}
+
+{\bf ??4+1 dimension??}
+
+new!
+
+\end{tcolorbox} 
+
+\section{[APPLICATION]}
+
+\subsection{ABJ anomaly 4d}
+This is an application of \ref{sec:mix_anom_noninv_defect}
+
+\subsection{Complex scalar boson [3d only?]}
+This theory has two phases, unbroken U(1) phase rotation, and superfluid: SSB U(1) where it does emerge/accident a U(1) (d-2)-form sym. Here in 3d, gauging the 0-form sym flips gives a gauge theory (?), flips the phase diagram (duality with inverse theory parameter?). 
+GOAL: show that the (d-2)-form sym was already there in the unbroken phase under disguise (?higher group or non invertible defect?).
+\textcolor{red}{WE MIGHT NEED TO INCREASE THE DIMENSIONS OTHERWISE THE TQFTS WE CAN STACK ARE SIMPLE, NO TWISTED THETA DEFECT} p.60 \cite{schafernameki2023ictplecturesnoninvertiblegeneralized}.
+
+\newpage
+ 
 
 
 
@@ -676,7 +441,7 @@ This has all been rather formal. We will now study a few examples and see what t
 
 
 \newpage
-{\bf Acknowledgments:} I want to thank the students and organizers of the TPI School at Jena for their enthusiastic participation and insightful questions. I am also lucky to have many wonderful collaborators and friends who have taught me most of the things I've discussed here. I want to particularly thank John McGreevy for many delightful conversations about The Correctness of Landau. I'm also very grateful to Aleksey Cherman, Arpit Das, Iñaki Garcia Etxebarria, Adrien Florio, Saso Grozdanov, Diego Hofman, Theo Jacobson, Napat Poovuttikul, Tin Sulejmanpasic and David Tong. I am supported in part by the STFC under grant number ST/T000708/1. 
+{\bf Acknowledgments:} I want to thank ... 
 
 \bibliographystyle{utphys}
 \bibliography{all}
